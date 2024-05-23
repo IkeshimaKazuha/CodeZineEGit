@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!-- 例外のハンドラクラス  -->
+<beans:bean class="com.javatech.apl.handler.GlobalExceptionResolver"/>
+
+
+<!--   	<bean id="MethodBeforeAdvice" class="G_T.OfficeSystem.controller.LoginController" />
+
+ 	<aop:config>
+		<aop:advisor pointcut="execution(* method(..))" advice-ref="beforeTrace" />
+	</aop:config>
+
+
+	<bean id="beforeTrace" class="G_T.OfficeSystem.model.EnterMethodLogAdvice"/>
+
+		<aop:aspectj-autoproxy />
+ -->
+
+<!-- 	<bean id="enterMethodLogAdvice" class="G_T.OfficeSystem.controller.LoginController"/> -->
+
+<!--  	<bean id="enterMethodLogAdvice" class="org.springframework.showcase.aop.EnterMethodLogAdvice"/>
+  	<bean id="logEnterAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="enterMethodLogAdvice"/>
+		<property name="pointcut" ref="logPointcut"/>
+	</bean>
+
+	<bean id="logPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+		<property name="pattern" value=".*Login.*"/>
+	</bean>
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+ -->
+
+
+
+</beans:beans>
+
+
+

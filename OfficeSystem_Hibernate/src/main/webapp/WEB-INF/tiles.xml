@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- Login -->
+	<definition name="Login" extends="layoutsTopOnly">
+		<put-attribute name="body" value="/WEB-INF/pages/Login.jsp"></put-attribute>
+	</definition>
+
+
+	<!-- Find -->
+	<definition name="Find" extends="layouts">
+		<put-attribute name="body" value="_Find" />
+	</definition>
+
+	<definition name="_Find" template="/WEB-INF/pages/Find.jsp">
+		<put-attribute name="_FindResult" value="/WEB-INF/pages/_FindResult.jsp" />
+	</definition>
+
+	<!-- _FindResult -->
+	<definition name="_FindResult" template="/WEB-INF/pages/_FindResult.jsp"></definition>
+
+
+
+	<definition name="SendMail" extends="layoutsTopOnly">
+		<put-attribute name="body" value="/WEB-INF/pages/SendMail.jsp"></put-attribute>
+	</definition>
+
+	<!-- SendMailFinish -->
+	<definition name="SendMailFinish" template="/WEB-INF/pages/SendMailFinish.jsp"></definition>
+
+
+
+
+	<!-- ApplicationManage -->
+	<definition name="ApplicationManage" extends="layouts">
+		<put-attribute name="body" value="_ApplicationManage" />
+	</definition>
+
+	<definition name="_ApplicationManage" template="/WEB-INF/pages/ApplicationManage.jsp">
+		<put-attribute name="_ApplicationList" value="/WEB-INF/pages/_ApplicationList.jsp" />
+	</definition>
+
+	<!-- _ApplicationList -->
+	<definition name="_ApplicationList" template="/WEB-INF/pages/_ApplicationList.jsp"></definition>
+
+
+
+
+	<!-- ApplicationInfo -->
+	<definition name="ApplicationInfo" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/pages/ApplicationInfo.jsp" />
+	</definition>
+
+
+
+	<!-- templateがベース -->
+	<definition name="layouts" template="/WEB-INF/layout/template.jsp"> <!-- (2) -->
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" /> <!-- (3) -->
+		<put-attribute name="LeftMenu" value="/WEB-INF/layout/LeftMenu.jsp" /> <!-- (4) -->
+	</definition>
+
+
+	<!-- templateTopOnlyがベース -->
+	<definition name="layoutsTopOnly" template="/WEB-INF/layout/templateTopOnly.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+	</definition>
+
+
+
+	<!-- SessionTimeout -->
+	<definition name="SessionTimeout" template="/WEB-INF/error/SessionTimeout.jsp"></definition>
+
+
+
+	<!-- InternalError -->
+	<definition name="InternalError" template="/WEB-INF/error/InternalError.jsp"></definition>
+
+	<!-- NotFoundError -->
+	<definition name="error404" template="/WEB-INF/error/error404.jsp"></definition>
+
+	<!-- NotFoundError -->
+	<definition name="LoginTest" template="/WEB-INF/pages/LoginTest.jsp"></definition>
+
+	<!-- NotFoundError -->
+	<definition name="my-login" template="/WEB-INF/pages/my-login.jsp"></definition>
+
+
+	<!-- UserBasicInfo -->
+	<definition name="UserBasicInfo" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/pages/UserBasicInfo.jsp"></put-attribute>
+	</definition>
+
+	<!-- UserBasicInfoChange -->
+	<definition name="UserBasicInfoChange" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/pages/UserBasicInfoChange.jsp"></put-attribute>
+	</definition>
+
+	<!-- UserBasicInfoChangeCompletion -->
+	<definition name="UserBasicInfoChangeCompletion" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/pages/UserBasicInfoChangeCompletion.jsp"></put-attribute>
+	</definition>
+
+	<!-- UserBasicInfoChangeConfirmation -->
+	<definition name="UserBasicInfoChangeConfirmation" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/pages/UserBasicInfoChangeConfirmation.jsp"></put-attribute>
+	</definition>
+
+</tiles-definitions>

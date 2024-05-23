@@ -1,0 +1,95 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+<!--     <http auto-config="true" >
+
+        認可の設定
+        <intercept-url pattern="/Login*" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+        <intercept-url pattern="/Login*" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/Login*" access="hasRole('ROLE_USER')" />
+
+        権限なし時の遷移先
+        <access-denied-handler error-page="/403" />
+
+        認証のログイン処理
+        <form-login
+            login-page="/"
+            default-target-url="/Find"
+            authentication-failure-url="/Login-error"
+            login-processing-url="/Login"/>
+
+        認証のログアウト処理
+        <logout
+            logout-url="/Login"
+            logout-success-url="/"
+            invalidate-session="true"/>
+        anonymousユーザのROLE
+        <anonymous granted-authority="ROLE_ANONYMOUS" />
+    </http>
+
+    ユーザとROLEを定義
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+                <user name="user" password="user" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager> -->
+</beans:beans>
+
+
+<!-- <beans xmlns="http://www.springframework.org/schema/beans"
+             xmlns:sec="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                   http://www.springframework.org/schema/security
+                   http://www.springframework.org/schema/security/spring-security.xsd">
+
+  <sec:http pattern="/resources/**" security="none"/>
+
+  <sec:http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint">
+    <sec:intercept-url pattern="/Find" access="permitAll"/>
+    <sec:intercept-url pattern="/Login" access="permitAll"/>
+    <sec:intercept-url pattern="/**" access="permitAll" />
+
+    <sec:custom-filter position="FORM_LOGIN_FILTER" ref="applicationUsernamePasswordAuthenticationFilter" />
+
+    <sec:logout logout-url="/Login" logout-success-url="/OfficeSystem_Hibernate/Login?from=logout" invalidate-session="true" />
+
+    <sec:csrf/>
+  </sec:http>
+
+  <bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+    <constructor-arg value="/Login" />
+  </bean>
+
+  <bean id="applicationUsernamePasswordAuthenticationFilter" class="jp.co.example.filter.ApplicationUsernamePasswordAuthenticationFilter">
+    <property name="authenticationManager" ref="authenticationManager" />
+    <property name="authenticationSuccessHandler" ref="authenticationSuccessHandler" />
+    <property name="authenticationFailureHandler" ref="authenticationFailureHandler" />
+    <property name="filterProcessesUrl" value="/authentication" />
+  </bean>
+
+  <bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+    <property name="defaultTargetUrl" value="/home"/>
+  </bean>
+
+  <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+    <property name="defaultFailureUrl" value="/Login?error=true"/>
+  </bean>
+
+  <sec:authentication-manager alias="authenticationManager">
+    <sec:authentication-provider ref="applicationUsernamePasswordAuthenticationProvider" />
+  </sec:authentication-manager>
+
+  <bean id="applicationUsernamePasswordAuthenticationProvider" class="jp.co.example.auth.ApplicationUsernamePasswordAuthenticationProvider">
+  </bean>
+
+</beans> -->

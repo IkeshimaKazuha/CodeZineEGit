@@ -1,0 +1,40 @@
+Hibernateの特徴は大きく3つある。
+1つ目は、コネクション取得の記述を一か所にまとめることができ、自動的にデータベースに接続してくれる点。
+2つ目はSQL分を記述しなくても簡単にデータの取得更新が行える点。
+3つ目は定義ファイル(xml)からModel（マッパー）に自動的にマッピングしてくれる点。
+があり、SQL文を書かなくても簡単にかつスマートにデータの取得が行えるもの。データベースを操作する際に便利なライブラリ。
+
+従来のSQL文を使用した接続と違い、SQL文の代わりにオブジェクトとリレーショナルデータベースの関係をHibernateに教えるための
+マッピングファイルが必要になる。このファイルの記述から、オブジェクトとリレーショナルデータベースの関係を読み取り、
+オブジェクトの構築をしてくれる。
+
+ハイバーネードを導入すると。テーブルを格納するマッパークラスの作成やインスタンスの作成、マッピングファイル（xml）をみて、リレーション
+が張られているかの確認、SQLを直接発行もできる。
+
+データベースから定義ファイルをもとに、ユーザーマスターとプロファイルのデータを取得して、JOINさせる。
+
+ハイバーネードの導入によって、セレクトによって取得したデータの結果を分解し、クラスオブジェクトを自動的に作ってくれる。
+＜SQL文での接続の際は、UserInfoModelDAOで取得したテーブルのような状態のデータを、一行ごとのUserInfoModelクラスのインスタンス
+に変更するために、mapperクラスを作る過程があった＞
+SQL文を書かなくてもいい。
+データの更新や追加もSQL文がいらずにすむ。
+
+
+もし、Hibernateを新しく追加する場合(例：テーブル名userrole_info)...
+・Userroleテーブルとマッピングクラスを「src/main/G_T/OfficeSystem/model」に
+「HibUserRoleModel」とつけて作成。！このクラスにテーブルのデータが挿入される！
+	（テーブルはユーザーマスタテーブルと一対一関係しているので、プロファイル情報モデル内に、１つのユーザーマスタモデル変数がある
+	private HibUserMasterModel hibUserMasterModel;）
+・作成した「HibUserRoleModel」をテーブルにマッピングするために「src/main/resourse」に、
+hibermate.cfg.xmlに、<mapping resource="hibuserrole_infomodel.hbm.xml"/>と入力
+！クラスとRDBが結び付けられる！
+
+・データ検索処理をするために、「FindModel」に要素を追加する。
+例）public List<HibUserMasterModel> FindUserByCondition(FindConditionModel condition) {
+のtryの中の.createAlias("hibProfileInfoModel","p", JoinType.INNER_JOIN);
+をコピペして、HibUserRoleModelに書き換える。
+
+
+・Hibernateの設定をロードしている「ApplicationContextConfig」の「getSessionFactory()」クラスでは、DB設定ファイルである「hibernate.cfg.xml」を読み取って、DBとの接続を
+確立している。
+
