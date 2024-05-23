@@ -174,7 +174,7 @@
 				<form method="post" action="ApplicationManage" id="Form1">
 					<div class="row div1">
 						<div class="col-xs-offset-1 col-xs-2 div状態">状態</div>
-						<select class="col-xs-2 option select1" id="status" name="status">
+						<select class="col-xs-2 option select1" id="applyStatus" name="applyStatus">
 							<option value="5">すべて</option>
 							<option value="0" selected>未承認</option>
 							<option value="1" >承認済み</option>

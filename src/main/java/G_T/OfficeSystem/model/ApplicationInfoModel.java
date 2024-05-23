@@ -208,7 +208,12 @@ public class ApplicationInfoModel{
 		this.userIdIsSet = userIdIsSet;
 	}
 
-
+	//ユーザー情報を検索し、検索結果一覧に設定する	
+		public void ApplyUser(ApplicatiomConditionModel condition) {
+			setAllUserList(ApplycationInfoModelDAO.ApplyUser(condition)); //ユーザー情報を取得し、「allUserList」に設定する。
+	    	SortAll(sortColumn, sortOrder); //現在のソート列と昇順で「検索結果一覧」をソートする
+			GetPage(showNumber, currentPage);
+		}
 
 	public void GetPage(int showNumber, int currentPage)
 	{

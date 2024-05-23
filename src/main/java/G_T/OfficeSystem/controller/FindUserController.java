@@ -42,6 +42,8 @@ import org.springframework.web.multipart.MultipartFile;
 import G_T.OfficeSystem.model.FindConditionModel;
 import G_T.OfficeSystem.model.FindModel;
 
+import G_T.OfficeSystem.model.ApplicationConditionModel;
+import G_T.OfficeSystem.model.ApplicationInfoModel;
 
 @Controller
 public class FindUserController {
@@ -425,7 +427,20 @@ public class FindUserController {
 	  response.flushBuffer();
 	  inputStream.close();
 	}
-}	
+	 @Autowired
+	 ApplicationInfoModel applicationInfoModel;
+	@RequestMapping(value="/ApplicationManage", method = RequestMethod.GET)
+	 public String ApplicationManage() {
+		  return "ApplicationManage";
+		}
+	@RequestMapping(value = "/ApplicationManage", method = RequestMethod.POST)
+	 public String ApplicationManage(HttpSession session, ApplicationConditionModel condition, Model model) {
+	  applicationInfoModel.(condition);
+	  model.addAttribute(" applicationInfoModel",  applicationInfoModel);
+	  return ("_ApplicationList");
+	}
+}
+
 /*	@RequestMapping(value="/SendMailInsertAddress", method = RequestMethod.POST)
 	public String SendMailInsertAddress(HttpSession session,  Model model
 			, @RequestParam String address) {

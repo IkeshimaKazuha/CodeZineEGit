@@ -32,6 +32,8 @@ public class ApplicationConditionModel {
 		}
 
 		public ApplicationConditionModel (
+			String applyId,
+			Integer applyStatus,
 			String userId,
 			String email,
 			String nickName,
@@ -55,6 +57,8 @@ public class ApplicationConditionModel {
 			String specialSkill,
 			String comment
 		) {
+			this.applyId = applyId;
+			this.applyStatus = applyStatus;
 			this.nickName =  nickName;
 			this.userName = userName;
 			this.sex = sex;
@@ -74,6 +78,161 @@ public class ApplicationConditionModel {
 			this.position = position;
 			this.hobby = hobby;
 			this.specialSkill = specialSkill;
+			this.comment = comment;
+		}
+		public String getApplyId() {
+			return applyId;
+		}
+		public void setApplyId(String applyId){
+			this.applyId = applyId;
+		}
+		
+		public Integer getApplyStatus() {
+			return applyStatus;
+		}
+		public void setApplyStatus(Integer applyStatus){
+			this.applyStatus = applyStatus;
+		}
+		
+		public String getNickName() {
+			return nickName;
+		}
+		public void setNickName(String nickName){
+			this.nickName = nickName;
+		}
+
+		public String getUserName() {
+			return userName;
+		}
+		public void setUserName(String userName){
+			this.userName = userName;
+		}
+
+		public Integer getSex() {
+			return sex;
+		}
+		public void setSex(Integer sex){
+			this.sex = sex;
+		}
+
+		public String getBirthday1() {
+			return birthday1;
+		}
+		public void setBirthday1(String birthday1) {
+			this.birthday1 = birthday1;
+		}
+		public String getBirthday2() {
+			return birthday2;
+		}
+		public void setBirthday2(String birthday2) {
+			this.birthday2 = birthday2;
+		}
+		public String getBirthday3() {
+			return birthday3;
+		}
+		public void setBirthday3(String birthday3) {
+			this.birthday3 = birthday3;
+		}
+
+		public String getBirthday() {
+			String s = getBirthday1() + getBirthday2() + getBirthday3();
+			setBirthday(s);
+			return birthday;
+		}
+		public void setBirthday(String birthday){
+			//birthday = birthday.replaceAll(",", "");
+			this.birthday = birthday;
+		}
+
+		public Integer getAge() {
+			return age;
+		}
+		public void setAge(Integer age){
+			this.age = age;
+		}
+
+		public String getTel() {
+			return tel;
+		}
+		public void setTel(String tel){
+			this.tel = tel;
+		}
+
+		public String getPostcode() {
+			return postcode;
+		}
+		public void setPostcode(String postcode){
+			this.postcode = postcode;
+		}
+
+		public String getAddress() {
+			return address;
+		}
+		public void setAddress(String address){
+			this.address = address;
+		}
+
+		public String getHireDate1() {
+			return hireDate1;
+		}
+		public void setHireDate1(String hireDate1) {
+			this.hireDate1 = hireDate1;
+		}
+		public String getHireDate2() {
+			return hireDate2;
+		}
+		public void setHireDate2(String hireDate2) {
+			this.hireDate2 = hireDate2;
+		}
+		public String getHireDate3() {
+			return hireDate3;
+		}
+		public void setHireDate3(String hireDate3) {
+			this.hireDate3 = hireDate3;
+		}
+
+		public String getHireDate() {
+			//hireDate = hireDate.replaceAll(",", "");
+			String s = getHireDate1() + getHireDate2() + getHireDate3();
+			setHireDate(s);
+			return hireDate;
+		}
+		public void setHireDate(String hireDate){
+			this.hireDate = hireDate;
+		}
+
+		public String getAffiliation() {
+			return affiliation;
+		}
+		public void setAffiliation(String affiliation){
+			this.affiliation = affiliation;
+		}
+
+		public String getPosition() {
+			return position;
+		}
+		public void setPosition(String position){
+			this.position = position;
+		}
+
+		public String getHobby() {
+			return hobby;
+		}
+		public void setHobby(String hobby){
+			this.hobby = hobby;
+		}
+
+		public String getSpecialSkill() {
+			return specialSkill;
+		}
+		public void setSpecialSkill(String specialSkill){
+			this.specialSkill = specialSkill;
+		}
+
+		public String getComment() {
+			return comment;
+		}
+		public void setComment(String comment){
 			this.comment = comment;
 		}
 }
