@@ -16,8 +16,8 @@ public class ApplicationInfoModelMapper implements RowMapper<ApplicationInfoMode
 
 	@Override
 	public ApplicationInfoModel mapRow(ResultSet rs,int rowNum)throws SQLException{
-		Integer applyId = rs.getInteger("APPLY_ID");
-		Integer applyStatus = rs.getInteger("APPLY_STATUS");
+		String applyId = rs.getString("APPLY_ID");
+		String applyStatus = rs.getString("APPLY_STATUS");
 		 String applyFile = rs.getString("APPLY_FILE");
 		 String title = rs.getString("TITLE");
 		 Timestamp applyTime = rs.getTimestamp("APPLY_TIME");

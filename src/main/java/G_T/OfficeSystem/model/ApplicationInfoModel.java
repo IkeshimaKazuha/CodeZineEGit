@@ -1,6 +1,7 @@
 package G_T.OfficeSystem.model;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -38,14 +40,23 @@ public class ApplicationInfoModel{
 	public File file;
 	private List<HibApplicationInfoModel> allApplicationList;
 	private List<HibApplicationInfoModel> showApplicationList;
+	/*public Integer applyId;
+	public Integer applyStatus;
+	public String applyFile;
+	public String title;
+	public Timestamp applyTime;
+	public Timestamp approveTime;
+	public String noticeMatter;
+	public String userId;*/
 	private int showNumber;
 	private int currentPage;
 	private String sortOrder;
 	private String sortColumn;
 	@Autowired
 	private SessionFactory sessionFactory;
+	private List<HibApplicationInfoModel> allUserList;
 
-	public ApplicationInfoModel(){
+	public ApplicationInfoModel(String applyId2, String applyStatus2, String applyFile2, String title2, Timestamp applyTime2, Timestamp approveTime2, String noticeMatter2, String userId2){
 
 		showNumber = 10;
 		currentPage = 1;
@@ -207,14 +218,103 @@ public class ApplicationInfoModel{
 	public void setUserIdIsSet(Boolean userIdIsSet) {
 		this.userIdIsSet = userIdIsSet;
 	}
-
+	public void setAllUserList(List<HibApplicationInfoModel> allUserList) {
+		this.allUserList = allUserList;
+	}
 	//ユーザー情報を検索し、検索結果一覧に設定する	
-		public void ApplyUser(ApplicatiomConditionModel condition) {
-			setAllUserList(ApplycationInfoModelDAO.ApplyUser(condition)); //ユーザー情報を取得し、「allUserList」に設定する。
+		public void ApplyUser(ApplicationConditionModel condition) {
+			
+			setAllUserList(ApplyUserByCondition(condition)); //ユーザー情報を取得し、「allUserList」に設定する。
 	    	SortAll(sortColumn, sortOrder); //現在のソート列と昇順で「検索結果一覧」をソートする
 			GetPage(showNumber, currentPage);
 		}
 
+		public List<HibApplicationInfoModel> ApplyUserByCondition(ApplicationConditionModel condition) {
+			Session session = null;
+	    	try {
+	    		session = sessionFactory.openSession();
+		        Criteria criteria = session.createCriteria(HibApplicationInfoModel.class)
+		        		.createAlias("hibProfileInfoModel","p", JoinType.INNER_JOIN);
+		        criteria.add(Restrictions.eqProperty("p.userId", "userId"));
+
+		        if (condition != null) {
+			        if (condition.getApplyId() != null && !condition.getApplyId().equals("")) {
+			        	criteria.add(Restrictions.like("APPLY_ID", "%" + condition.getApplyId() + "%"));
+			        }
+			        if (condition.getApplyStatus() != null && !condition.getApplyStatus().equals("")) {
+			        	criteria.add(Restrictions.like("APPLY_STATUS", "%" + condition.getApplyStatus() + "%"));
+			        }
+
+			        if (condition.getNickName() != null && !condition.getNickName().equals("")) {
+			        	criteria.add(Restrictions.like("p.nickName", "%" + condition.getNickName() + "%"));
+			        }
+
+			        if (condition.getUserName() != null && !condition.getUserName().equals("")) {
+			        	criteria.add(Restrictions.like("p.userName", "%" + condition.getUserName() + "%"));
+			        }
+
+			        if (condition.getSex() != null) {
+			        	criteria.add(Restrictions.eq("p.sex", condition.getSex()));
+			        }
+
+			        if (condition.getBirthday() != null && !condition.getBirthday().equals("")) {
+			        	//criteria.add(Restrictions.like("p.birthday", "%" + condition.getBirthday() + "%"));
+			        	if(condition.getBirthday1() != null && !condition.getBirthday1().equals("")) {
+			        		criteria.add(Restrictions.like("p.birthday", condition.getBirthday1() + "%"));
+			        	}
+			        	if(condition.getBirthday2() != null && !condition.getBirthday2().equals("")) {
+			        		criteria.add(Restrictions.like("p.birthday", "____" + condition.getBirthday2() + "%"));
+			        	}
+			        	if(condition.getBirthday3() != null && !condition.getBirthday3().equals("")) {
+			        		criteria.add(Restrictions.like("p.birthday", "%" + condition.getBirthday3()));
+			        	}
+			        }
+
+			        if (condition.getTel() != null && !condition.getTel().equals("")) {
+			        	criteria.add(Restrictions.like("p.tel", "%" + condition.getTel() + "%"));
+			        }
+
+			        if (condition.getPostcode() != null && !condition.getPostcode().equals("")) {
+			        	criteria.add(Restrictions.like("p.postcode", "%" + condition.getPostcode() + "%"));
+			        }
+
+			        if (condition.getAddress() != null && !condition.getAddress().equals("")) {
+			        	criteria.add(Restrictions.like("p.address", "%" + condition.getAddress() + "%"));
+			        }
+
+			        if (condition.getHireDate() != null && !condition.getHireDate().equals("")) {
+			        	criteria.add(Restrictions.like("p.hireDate", "%" + condition.getHireDate() + "%"));
+			        }
+
+			        if (condition.getAffiliation() != null && !condition.getAffiliation().equals("")) {
+			        	criteria.add(Restrictions.like("p.affiliation", "%" + condition.getAffiliation() + "%"));
+			        }
+
+			        if (condition.getPosition() != null && !condition.getPosition().equals("")) {
+			        	criteria.add(Restrictions.like("p.position", "%" + condition.getPosition() + "%"));
+			        }
+
+			        if (condition.getSpecialSkill() != null && !condition.getSpecialSkill().equals("")) {
+			        	criteria.add(Restrictions.like("p.specialSkill", "%" + condition.getSpecialSkill() + "%"));
+			        }
+
+			        if (condition.getComment() != null && !condition.getComment().equals("")) {
+			        	criteria.add(Restrictions.like("p.comment", "%" + condition.getComment() + "%"));
+			        }
+		        }
+
+		        return criteria.list();
+		    }
+	    	catch (Exception ex) {
+				ex.printStackTrace();
+				return null;
+			}
+	    	finally {
+	    		session.close();
+	    	}
+	    }
+
+		
 	public void GetPage(int showNumber, int currentPage)
 	{
 		int sNumber = showNumber;

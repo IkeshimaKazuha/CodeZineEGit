@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class ApplycationInfoModelDAO extends JdbcDaoSupport{
+public class ApplicationInfoModelDAO extends JdbcDaoSupport{
 
 	@Autowired
-	public ApplycationInfoModelDAO(DataSource dataSource) {
+	public ApplicationInfoModelDAO(DataSource dataSource) {
 		this.setDataSource(dataSource);
 	}
 
@@ -38,7 +38,7 @@ public class ApplycationInfoModelDAO extends JdbcDaoSupport{
 	}
 
 
-	public List<ApplicationInfoModel> findUser(ApplicationConditionModel condition) {
+	public List<ApplicationInfoModel> ApplyUser(ApplicationConditionModel condition) {
 		String sql = UserInfoModelMapper.BASE_SQL + " and u.TYPE = 2 ";
 
 		if (condition != null) {
